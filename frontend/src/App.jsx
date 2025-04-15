@@ -4,6 +4,7 @@ import Dashboard from "./pages/Admin/Dashboard";
 import CreateAdmission from "./pages/Admin/Admission/CreateAdmission";
 import Sidebar from "./components/AdminSidebar";
 import Navbar from "./components/Navbar";
+import CreateDivision from "./pages/Admin/Admission/CreateDivision";
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,6 +22,7 @@ const App = () => {
             <Routes>
               <Route path="/admin" element={<Dashboard />} />
               <Route path="/admin/admission/create" element={<CreateAdmission />} />
+              <Route path="/admin/admission/create-division" element={<CreateDivision />} />
             </Routes>
           </div>
         </div>

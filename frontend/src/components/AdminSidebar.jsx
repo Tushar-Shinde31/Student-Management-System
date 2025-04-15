@@ -60,8 +60,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 <Link to="/admin/admission/create" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/create" ? "bg-blue-600" : ""}`}>
                   <PlusCircle className="mr-2" /> Create Admission
                 </Link>
-                <Link to="/admin/admission/student-promotion" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/student-promotion" ? "bg-blue-600" : ""}`}>
-                  <ClipboardCheck className="mr-2" /> Student Promotion
+                <Link to="/admin/admission/create-division" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/student-promotion" ? "bg-blue-600" : ""}`}>
+                  <ClipboardCheck className="mr-2" /> Create Division
                 </Link>
                 <Link to="/admin/admission/cancel-student" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/cancel-student" ? "bg-blue-600" : ""}`}>
                   <MessageCircle className="mr-2" /> Cancel Student

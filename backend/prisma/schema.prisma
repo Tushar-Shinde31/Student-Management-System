@@ -20,5 +20,6 @@ model Admission {
   prn           String   @unique
   branch        String
   admissionType String
+  division      String?  // 👈 NEW: nullable division field
   createdAt     DateTime @default(now())
 }

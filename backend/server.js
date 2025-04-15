@@ -76,5 +76,38 @@ app.post("/api/admission/bulk", async (req, res) => {
   }
 });
 
+// Get all students who have NOT been assigned a division
+app.get("/api/admission/no-division", async (req, res) => {
+    try {
+      const unassignedStudents = await prisma.admission.findMany({
+        where: { division: null },
+        orderBy: { createdAt: "desc" }, // optional: latest first
+      });
+  
+      res.json(unassignedStudents);
+    } catch (error) {
+      console.error("Error fetching unassigned students:", error);
+      res.status(500).json({ error: "Failed to fetch students without division" });
+    }
+  });
+
+  
+  // Assign division to student
+app.patch("/api/admission/assign-division", async (req, res) => {
+  const { id, division } = req.body;
+
+  try {
+    const updated = await prisma.admission.update({
+      where: { id },
+      data: { division },
+    });
+    res.json(updated);
+  } catch (error) {
+    console.error("Error assigning division:", error);
+    res.status(500).json({ error: "Failed to assign division" });
+  }
+});
+
+
 // Start server
 app.listen(5000, () => console.log("Server running on port 5000"));

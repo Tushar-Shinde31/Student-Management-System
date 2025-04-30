@@ -66,7 +66,7 @@ app.post("/api/admission/bulk", async (req, res) => {
 
     const result = await prisma.admission.createMany({
       data: formattedAdmissions,
-      skipDuplicates: true, // prevent duplicates for unique fields like email/prn
+      skipDuplicates: true, 
     });
 
     res.status(201).json({ message: "Bulk admission upload successful", count: result.count });
@@ -81,7 +81,7 @@ app.get("/api/admission/no-division", async (req, res) => {
     try {
       const unassignedStudents = await prisma.admission.findMany({
         where: { division: null },
-        orderBy: { createdAt: "desc" }, // optional: latest first
+        orderBy: { createdAt: "desc" }, 
       });
   
       res.json(unassignedStudents);
@@ -107,6 +107,43 @@ app.patch("/api/admission/assign-division", async (req, res) => {
     res.status(500).json({ error: "Failed to assign division" });
   }
 });
+
+app.get("/api/admission/:prn", async (req, res) => {
+  const { prn } = req.params;
+  try {
+    const student = await prisma.admission.findUnique({
+      where: { prn },
+    });
+
+    if (!student) return res.status(404).json({ error: "Student not found" });
+
+    res.json(student);
+  } catch (error) {
+    console.error("Error fetching admission:", error);
+    res.status(500).json({ error: "Failed to fetch admission data" });
+  }
+});
+
+app.patch("/api/admission/update/:prn", async (req, res) => {
+  const { prn } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const updated = await prisma.admission.update({
+      where: { prn },
+      data: {
+        ...updatedData,
+        dob: updatedData.dob ? new Date(updatedData.dob) : undefined,
+      },
+    });
+
+    res.json(updated);
+  } catch (error) {
+    console.error("Error updating admission:", error);
+    res.status(500).json({ error: "Failed to update admission data" });
+  }
+});
+
 
 
 // Start server

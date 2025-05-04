@@ -7,6 +7,7 @@ import Sidebar from "./components/AdminSidebar";
 import Navbar from "./components/Navbar";
 import StudentSidebar from "./components/StudentSidebar";
 import StudentAdmission from "./pages/students/studentAdmission"; // 👈 import this
+import PramoteStudents from "./pages/Admin/Admission/PramoteStudents";
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,6 +34,7 @@ const App = () => {
               <Route path="/admin" element={<Dashboard />} />
               <Route path="/admin/admission/create" element={<CreateAdmission />} />
               <Route path="/admin/admission/create-division" element={<CreateDivision />} />
+              <Route path="/admin/admission/pramote-students" element={<PramoteStudents />} />
 
               {/* Add your student-specific routes here */}
               <Route path="/student/profile" element={<div>Student Profile Page</div>} />

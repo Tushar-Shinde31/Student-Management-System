@@ -144,6 +144,65 @@ app.patch("/api/admission/update/:prn", async (req, res) => {
   }
 });
 
+// Get students by academic year
+app.get("/api/admission/by-year/:year", async (req, res) => {
+  const { year } = req.params;
+  try {
+    const students = await prisma.admission.findMany({
+      where: { academicYear: year },
+      orderBy: { createdAt: "desc" },
+    });
+    res.json(students);
+  } catch (error) {
+    console.error("Error fetching students by year:", error);
+    res.status(500).json({ error: "Failed to fetch students" });
+  }
+});
+
+app.post("/api/admission/promote", async (req, res) => {
+  const { studentIds, nextYear } = req.body;
+
+  try {
+    const studentsToPromote = await prisma.admission.findMany({
+      where: { id: { in: studentIds } },
+    });
+
+    const promotedData = studentsToPromote.map((s) => ({
+      academicYear: nextYear,
+      firstName: s.firstName,
+      middleName: s.middleName,
+      lastName: s.lastName,
+      dob: s.dob,
+      email: s.email + "+" + nextYear, // Ensure unique email (avoid conflict)
+      bloodGroup: s.bloodGroup,
+      address: s.address,
+      prn: s.prn + "-" + nextYear, // Make new PRN or generate a new one
+      branch: s.branch,
+      admissionType: s.admissionType,
+      division: null,
+    }));
+
+    // Insert into the PromotedAdmission table
+    const result = await prisma.promotedAdmission.createMany({
+      data: promotedData,
+      skipDuplicates: true,
+    });
+
+    // Optionally, you can delete the promoted students from the original table if needed.
+    // await prisma.admission.deleteMany({
+    //   where: { id: { in: studentIds } },
+    // });
+
+    res.status(201).json({ message: "Students promoted", count: result.count });
+  } catch (error) {
+    console.error("Error promoting students:", error);
+    res.status(500).json({ error: "Failed to promote students" });
+  }
+});
+
+
+
+
 
 
 // Start server

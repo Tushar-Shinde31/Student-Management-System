@@ -66,9 +66,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 <Link to="/admin/admission/cancel-student" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/cancel-student" ? "bg-blue-600" : ""}`}>
                   <MessageCircle className="mr-2" /> Cancel Student
                 </Link>
-                <Link to="/admin/admission/view-students" className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/view-students" ? "bg-blue-600" : ""}`}>
-                  <Users className="mr-2" /> View Students
+                <Link to="/admin/admission/pramote-students"
+                  className={`flex items-center p-2 rounded-lg transition duration-300 hover:bg-blue-600 ${location.pathname === "/admin/admission/pramote-students" ? "bg-blue-600" : ""
+                    }`}>
+                  <Users className="mr-2" /> Pramote Students
                 </Link>
+
               </div>
             )}
           </nav>

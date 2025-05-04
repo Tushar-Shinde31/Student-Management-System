@@ -23,3 +23,21 @@ model Admission {
   division      String?  // 👈 NEW: nullable division field
   createdAt     DateTime @default(now())
 }
+
+model PromotedAdmission {
+  id             Int      @id @default(autoincrement())
+  academicYear   String
+  firstName      String
+  middleName     String?
+  lastName       String
+  dob            DateTime
+  email          String
+  bloodGroup     String?
+  address        String
+  prn            String
+  branch         String
+  admissionType  String
+  division       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

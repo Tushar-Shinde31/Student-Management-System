@@ -76,7 +76,7 @@ app.post("/api/admission/bulk", async (req, res) => {
   }
 });
 
-// Get all students who have NOT been assigned a division
+// Get all students who have NOT been assigned a divisions
 app.get("/api/admission/no-division", async (req, res) => {
     try {
       const unassignedStudents = await prisma.admission.findMany({

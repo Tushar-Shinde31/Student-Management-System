@@ -15,8 +15,8 @@ const StudentAdmission = () => {
     admissionType: "Regular CAP",
   });
 
-  const [prnInput, setPrnInput] = useState(""); // for search input
-  const [isUpdating, setIsUpdating] = useState(false); // determines PATCH or POST
+  const [prnInput, setPrnInput] = useState(""); 
+  const [isUpdating, setIsUpdating] = useState(false); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,7 +38,7 @@ const StudentAdmission = () => {
       const data = await res.json();
       setFormData({
         ...data,
-        dob: data.dob.split("T")[0], // format date for input
+        dob: data.dob.split("T")[0], 
       });
       setIsUpdating(true);
     } catch (error) {
@@ -66,7 +66,7 @@ const StudentAdmission = () => {
       const data = await response.json();
       if (response.ok) {
         alert(`Admission ${isUpdating ? "updated" : "submitted"} successfully!`);
-        setIsUpdating(true); // Once submitted, consider it update mode
+        setIsUpdating(true); 
       } else {
         alert("Error: " + data.error);
       }
@@ -82,7 +82,6 @@ const StudentAdmission = () => {
         {isUpdating ? "Update Admission" : "Student Admission Form"}
       </h2>
 
-      {/* PRN Input to fetch existing record */}
       <div className="mb-4 flex gap-2">
         <input
           type="text"

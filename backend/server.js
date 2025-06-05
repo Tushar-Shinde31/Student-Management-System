@@ -173,10 +173,10 @@ app.post("/api/admission/promote", async (req, res) => {
       middleName: s.middleName,
       lastName: s.lastName,
       dob: s.dob,
-      email: s.email + "+" + nextYear, // Ensure unique email (avoid conflict)
+      email: s.email + "+" + nextYear, 
       bloodGroup: s.bloodGroup,
       address: s.address,
-      prn: s.prn + "-" + nextYear, // Make new PRN or generate a new one
+      prn: s.prn + "-" + nextYear, 
       branch: s.branch,
       admissionType: s.admissionType,
       division: null,
@@ -188,22 +188,13 @@ app.post("/api/admission/promote", async (req, res) => {
       skipDuplicates: true,
     });
 
-    // Optionally, you can delete the promoted students from the original table if needed.
-    // await prisma.admission.deleteMany({
-    //   where: { id: { in: studentIds } },
-    // });
-
+   
     res.status(201).json({ message: "Students promoted", count: result.count });
   } catch (error) {
     console.error("Error promoting students:", error);
     res.status(500).json({ error: "Failed to promote students" });
   }
 });
-
-
-
-
-
 
 // Start server
 app.listen(5000, () => console.log("Server running on port 5000"));

@@ -4,7 +4,6 @@ const CreateDivision = () => {
   const [students, setStudents] = useState([]);
   const [updatedDivisions, setUpdatedDivisions] = useState({});
 
-  // Fetch students with no division on mount
   useEffect(() => {
     const fetchStudents = async () => {
       try {

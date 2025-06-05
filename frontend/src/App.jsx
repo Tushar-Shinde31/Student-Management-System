@@ -6,7 +6,7 @@ import CreateDivision from "./pages/Admin/Admission/CreateDivision";
 import Sidebar from "./components/AdminSidebar";
 import Navbar from "./components/Navbar";
 import StudentSidebar from "./components/StudentSidebar";
-import StudentAdmission from "./pages/students/studentAdmission"; // 👈 import this
+import StudentAdmission from "./pages/students/studentAdmission"; 
 import PramoteStudents from "./pages/Admin/Admission/PramoteStudents";
 
 const App = () => {
@@ -21,7 +21,6 @@ const App = () => {
       <Navbar toggleSidebar={toggleSidebar} />
 
       <div className="flex flex-grow relative">
-        {/* Conditionally show either AdminSidebar or StudentSidebar */}
         {isStudentRoute ? (
           <StudentSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         ) : (
@@ -36,11 +35,9 @@ const App = () => {
               <Route path="/admin/admission/create-division" element={<CreateDivision />} />
               <Route path="/admin/admission/pramote-students" element={<PramoteStudents />} />
 
-              {/* Add your student-specific routes here */}
               <Route path="/student/profile" element={<div>Student Profile Page</div>} />
               <Route path="/student/attendance" element={<div>Attendance Page</div>} />
               <Route path="/student/admission/fill-form" element={<StudentAdmission />} />
-              {/* etc... */}
             </Routes>
           </div>
         </div>
